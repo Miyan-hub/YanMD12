@@ -32,8 +32,8 @@ global.premium = ["6283890667327"] // Premium User
 global.hituet = 0
 
 //bot sett
-global.typemenu = 'v4' // menu type 'v1' => 'v10'
-global.typereply = 'v2' // reply type 'v1' => 'v4'
+global.typemenu = 'v1' // menu type 'v1' => 'v10'
+global.typereply = 'v1' // reply type 'v1' => 'v4'
 global.autoblocknumber = '' //set autoblock country code
 global.antiforeignnumber = '' //set anti foreign number country code
 global.welcome = false //welcome/left in groups
