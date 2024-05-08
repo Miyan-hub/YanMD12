@@ -2999,7 +2999,7 @@ break
                 })
             break
             case 'sendtome':
-                if (!m.quoted && !m.mtype == 'viewOnceMessageV2') return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
+                if (!m.quoted) return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
                 let ownernya = ownernumber + '@s.whatsapp.net'
                 let val = { ...m.quoted }
                 let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
@@ -3008,7 +3008,7 @@ break
                 XeonBotInc.sendMessage(ownernya, { forward: val }, { quoted: m })
             break
             case 'oncetoimage':
-                if (!m.quoted && !m.mtype == 'viewOnceMessageV2') return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
+                if (!m.quoted) return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
                 let val = { ...m.quoted }
                 let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
                 delete msg[Object.keys(msg)[0]].viewOnce
