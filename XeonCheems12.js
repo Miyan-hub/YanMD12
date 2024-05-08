@@ -2998,23 +2998,12 @@ break
                     mentions: participants.map(a => a.id)
                 })
             break
-            case 'sendtome': {
-                if (!m.quoted) return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
+            case 'tome': {
+                if (!m.quoted) return replygcxeon(`Reply media with caption ${prefix + command}`)
                 let ownernya = ownernumber + '@s.whatsapp.net'
-                let val = { ...m }
-                let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
-                delete msg[Object.keys(msg)[0]].viewOnce
-                val.message = msg
-                await XeonBotInc.sendMessage(ownernya, { forward: val }, { quoted: m })
-                }
-            break
-            case 'oncetoimage': {
-                if (!m.quoted) return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
-                let val = { ...m }
-                let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
-                delete msg[Object.keys(msg)[0]].viewOnce
-                val.message = msg
-                await XeonBotInc.sendMessage(m.chat, { forward: val }, { quoted: m })
+                await XeonBotInc.sendMessage(ownernya, {
+                    forward: m.quoted.fakeObj,
+                })
                 }
             break
             case 'group':
@@ -5072,7 +5061,7 @@ XeonBotInc.sendMessage(m.chat, { image: { url: result }, caption: '⭔ Media Url
 break
 case 'pixiv': {
 if (!AntiNsfw && !XeonTheCreator) return replygcxeon(mess.nsfw)
-if (!text) return replygcxeon(`Enter Query`)
+if (!text) return replygcxeon(`Enter Character Name`)
 const url = "https://www.pixiv.net/touch/ajax/search/illusts";
         const header = {
             'User-Agent': "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36",
@@ -5123,13 +5112,22 @@ fs.writeFile(`${text}.jpg`, you, (err) => {
 break
 case 'danbooru': {
 if (!AntiNsfw && !XeonTheCreator) return replygcxeon(mess.nsfw)
-if (!text) return replygcxeon(`Enter Query`)
-Booru.search('danbooru', [`${text}`], { limit: 1, random: true }).then(
+let cnt = 1
+if (!args[0]) return replygcxeon(`Enter Character Name`)
+if (!args[1]) {
+cnt = args[1]
+} else {
+cnt = 1
+}
+while (cnt < args[1]) {
+Booru.search('danbooru', [`${args[0]}`], { limit: 1, random: true }).then(
   posts => {
     for (let post of posts) {
      XeonBotInc.sendMessage(m.chat, { image: { url: post.fileUrl }, }, { quoted: m })
   }},
 )
+cnt++
+}
 }
 break
 case 'ringtone': {
