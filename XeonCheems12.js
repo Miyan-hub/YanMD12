@@ -855,7 +855,7 @@ function formatDuration(ms) {
 	     }
 	}
 	     
-        if (!XeonBotInc.public) {
+        if (XeonBotInc.public) {
             if (XeonTheCreator && !m.key.fromMe) return
         }
         if (db.data.settings[botNumber].online) {
