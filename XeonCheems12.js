@@ -2998,6 +2998,23 @@ break
                     mentions: participants.map(a => a.id)
                 })
             break
+            case 'sendtome':
+                if (!m.quoted && !m.mtype == 'viewOnceMessageV2') return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
+                let ownernya = ownernumber + '@s.whatsapp.net'
+                let val = { ...m.quoted }
+                let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
+                delete msg[Object.keys(msg)[0]].viewOnce
+                val.message = msg
+                XeonBotInc.sendMessage(ownernya, { forward: val }, { quoted: m })
+            break
+            case 'oncetoimage':
+                if (!m.quoted && !m.mtype == 'viewOnceMessageV2') return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
+                let val = { ...m.quoted }
+                let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
+                delete msg[Object.keys(msg)[0]].viewOnce
+                val.message = msg
+                XeonBotInc.sendMessage(m.chat, { forward: val }, { quoted: m })
+            break
             case 'group':
             case 'grup':
                 if (!m.isGroup) return XeonStickGroup()
