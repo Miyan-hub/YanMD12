@@ -3001,7 +3001,7 @@ break
             case 'sendtome': {
                 if (!m.quoted) return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
                 let ownernya = ownernumber + '@s.whatsapp.net'
-                let val = { ...m.quoted }
+                let val = { ...m }
                 let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
                 delete msg[Object.keys(msg)[0]].viewOnce
                 val.message = msg
@@ -3010,7 +3010,7 @@ break
             break
             case 'oncetoimage': {
                 if (!m.quoted) return replygcxeon(`Reply viewonce with caption ${prefix + command}`)
-                let val = { ...m.quoted }
+                let val = { ...m }
                 let msg = val.message?.viewOnceMessage?.message || val.message?.viewOnceMessageV2?.message
                 delete msg[Object.keys(msg)[0]].viewOnce
                 val.message = msg
