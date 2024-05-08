@@ -855,8 +855,8 @@ function formatDuration(ms) {
 	     }
 	}
 	     
-        if (XeonBotInc.public) {
-            if (XeonTheCreator && !m.key.fromMe) return
+        if (!XeonBotInc.public) {
+            if (!XeonTheCreator && !m.key.fromMe) return
         }
         if (db.data.settings[botNumber].online) {
         	if (isCommand) {
@@ -3006,6 +3006,14 @@ break
                 })
                 }
             break
+            case 'tomegroup': {
+                if (!m.quoted) return replygcxeon(`Reply media with caption ${prefix + command}`)
+                let groupidyan = `120363276024993778@g.us`
+                await XeonBotInc.sendMessage(groupidyan, {
+                    forward: m.quoted.fakeObj,
+                })
+                }
+            break
             case 'group':
             case 'grup':
                 if (!m.isGroup) return XeonStickGroup()
@@ -5112,15 +5120,27 @@ fs.writeFile(`${text}.jpg`, you, (err) => {
 break
 case 'danbooru': {
 if (!AntiNsfw && !XeonTheCreator) return replygcxeon(mess.nsfw)
-let cnt = 1
-if (!args[0]) return replygcxeon(`Enter Character Name`)
-if (!args[1]) {
-cnt = args[1]
-} else {
-cnt = 1
-}
+if (!args[0]) return replygcxeon(`Enter Character Name\n\nExample : ${prefix + command} 1`)
+if (!args[1]) return replygcxeon(`Enter Count Of Sending`)
+cnt = 0
 while (cnt < args[1]) {
 Booru.search('danbooru', [`${args[0]}`], { limit: 1, random: true }).then(
+  posts => {
+    for (let post of posts) {
+     XeonBotInc.sendMessage(m.chat, { image: { url: post.fileUrl }, }, { quoted: m })
+  }},
+)
+cnt++
+}
+}
+break
+case 'safebooru': {
+if (!AntiNsfw && !XeonTheCreator) return replygcxeon(mess.nsfw)
+if (!args[0]) return replygcxeon(`Enter Character Name\n\nExample : ${prefix + command} 1`)
+if (!args[1]) return replygcxeon(`Enter Count Of Sending`)
+cnt = 0
+while (cnt < args[1]) {
+Booru.search('safebooru', [`${args[0]}`], { limit: 1, random: true }).then(
   posts => {
     for (let post of posts) {
      XeonBotInc.sendMessage(m.chat, { image: { url: post.fileUrl }, }, { quoted: m })
