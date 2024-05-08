@@ -1,0 +1,24 @@
+{
+  "name": "YanMD12",
+  "version": "12.0",
+  "description": "YanMD12, A wabot",
+  "logo": "https://i.ibb.co/FsvbwqF/XLICON.jpg",
+  "keywords": ["whatsapp", "bot", "md", "multi-device", "Yan", "YanMD12", "wabot", "termux-bot", "sc-bot"],
+  "repository": "https://github.com/Yannnnnzzzzzzz00001/YanMD12",
+  "stack": "container",
+    "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+    }
+  ]
+}
+
